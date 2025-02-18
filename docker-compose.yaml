@@ -1,0 +1,19 @@
+services:
+  postgres:
+    container_name: ${CONTAINER_NAME}
+    image: postgres:15.7
+    restart: always
+    shm_size: 128mb
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - '${DATABASE_PORT}:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:
